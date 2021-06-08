@@ -68,13 +68,16 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
   void initState() {
     super.initState();
     var _fluttermojiController;
+    var _fluttermojiFunctions;
+
     Get.put(FluttermojiController());
     _fluttermojiController = Get.find<FluttermojiController>();
+    _fluttermojiFunctions = Get.find<FluttermojiFunctions>();
     setState(() {
       tabController = TabController(length: 11, vsync: this);
       fluttermojiController = _fluttermojiController;
 
-      fluttermojiFunctions = new FluttermojiFunctions();
+      fluttermojiFunctions = _fluttermojiFunctions;
     });
   }
 
