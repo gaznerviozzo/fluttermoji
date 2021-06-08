@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'fluttermoji_assets/fluttermojimodel.dart';
 import 'package:get/get.dart';
 import 'fluttermojiController.dart';
+import 'fluttermojiFunctions.dart';
 
 /// This widget provides a UI for customizing the Fluttermoji
 ///
@@ -19,11 +20,36 @@ class FluttermojiCustomizer extends StatefulWidget {
   final String outerTitleText;
   final double scaffoldHeight;
   final double scaffoldWidth;
+  final String hairstyleTitle;
+  final String hairColourTitle;
+  final String facialHairTitle;
+  final String facialHairColourTitle;
+  final String outfitTitle;
+  final String outfitColourTitle;
+  final String eyesTitle;
+  final String eyebrowsTitle;
+  final String mouthTitle;
+  final String skinTitle;
+  final String glassesTitle;
+  final Function? onSave;
+
   FluttermojiCustomizer(
       {Key? key,
       this.outerTitleText = 'Customize :',
       this.scaffoldHeight = 0.0,
-      this.scaffoldWidth = 0.0})
+      this.scaffoldWidth = 0.0,
+      this.hairstyleTitle = "Hairstyle",
+      this.hairColourTitle = "Hair Colour",
+      this.facialHairTitle = "Facial Hair",
+      this.facialHairColourTitle = "Facial Hair Colour",
+      this.outfitTitle = "Outfit",
+      this.outfitColourTitle = "Outfit Colour",
+      this.eyesTitle = "Eyes",
+      this.eyebrowsTitle = "Eyebrows",
+      this.mouthTitle = "Mouth",
+      this.skinTitle = "Skin",
+      this.glassesTitle = "Glasses",
+      this.onSave})
       : super(key: key);
 
   @override
@@ -33,6 +59,7 @@ class FluttermojiCustomizer extends StatefulWidget {
 class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
     with SingleTickerProviderStateMixin {
   late FluttermojiController fluttermojiController;
+  late FluttermojiFunctions fluttermojiFunctions;
   late TabController tabController;
   var heightFactor = 0.4;
   var widthFactor = 0.95;
@@ -46,6 +73,8 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
     setState(() {
       tabController = TabController(length: 11, vsync: this);
       fluttermojiController = _fluttermojiController;
+
+      fluttermojiFunctions = new FluttermojiFunctions();
     });
   }
 
@@ -281,9 +310,14 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
                       fontWeight: FontWeight.w700),
                 ),
                 IconButton(
-                  onPressed: () {
+                  onPressed: () async {
                     fluttermojiController.setFluttermoji();
                     setState(() {});
+
+                    if (widget.onSave != null) {
+                      widget.onSave!(
+                          await fluttermojiFunctions.encodeMySVGtoString());
+                    }
                   },
                   icon: Icon(
                     Icons.save,
@@ -305,47 +339,47 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
                         key: "style"), */
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/hair.svg",
-                  title: "Hairstyle",
+                  title: widget.outerTitleText,
                   key: "topType"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/haircolor.svg",
-                  title: "Hair Colour",
+                  title: widget.hairColourTitle,
                   key: "hairColor"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/beard.svg",
-                  title: "Facial Hair",
+                  title: widget.facialHairTitle,
                   key: "facialHairType"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/beardcolor.svg",
-                  title: "Facial Hair Colour",
+                  title: widget.facialHairTitle,
                   key: "facialHairColor"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/outfit.svg",
-                  title: "Outfit",
+                  title: widget.outfitTitle,
                   key: "clotheType"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/outfitcolor.svg",
-                  title: "Outfit Colour",
+                  title: widget.outfitColourTitle,
                   key: "clotheColor"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/eyes.svg",
-                  title: "Eyes",
+                  title: widget.eyesTitle,
                   key: "eyeType"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/eyebrow.svg",
-                  title: "Eyebrows",
+                  title: widget.eyebrowsTitle,
                   key: "eyebrowType"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/mouth.svg",
-                  title: "Mouth",
+                  title: widget.mouthTitle,
                   key: "mouthType"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/skin.svg",
-                  title: "Skin",
+                  title: widget.skinTitle,
                   key: "skinColor"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/accessories.svg",
-                  title: "Glasses",
+                  title: widget.glassesTitle,
                   key: "accessoriesType"),
             ]),
           )
