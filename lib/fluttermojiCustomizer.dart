@@ -344,7 +344,7 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
                         key: "style"), */
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/hair.svg",
-                  title: widget.outerTitleText,
+                  title: widget.hairstyleTitle,
                   key: "topType"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/haircolor.svg",
@@ -356,7 +356,7 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
                   key: "facialHairType"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/beardcolor.svg",
-                  title: widget.facialHairTitle,
+                  title: widget.facialHairColourTitle,
                   key: "facialHairColor"),
               ExpandedFluttermojiCardItem(
                   iconAsset: "attributeicons/outfit.svg",
