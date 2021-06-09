@@ -34,6 +34,7 @@ class FluttermojiCustomizer extends StatefulWidget {
   final String skinTitle;
   final String glassesTitle;
   final Function? onSave;
+  final Color? backgroundColor;
 
   FluttermojiCustomizer(
       {Key? key,
@@ -51,6 +52,7 @@ class FluttermojiCustomizer extends StatefulWidget {
       this.mouthTitle = "Mouth",
       this.skinTitle = "Skin",
       this.glassesTitle = "Glasses",
+      this.backgroundColor,
       this.onSave})
       : super(key: key);
 
@@ -320,8 +322,8 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
                     setState(() {});
 
                     if (widget.onSave != null) {
-                      widget.onSave!(
-                          fluttermojiController.getFluttermojiFromOptions());
+                      widget.onSave!(fluttermojiController
+                          .getFluttermojiFromOptions(widget.backgroundColor));
                     }
                   },
                   icon: Icon(

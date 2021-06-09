@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import './fluttermoji_assets/style.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,7 +34,7 @@ class FluttermojiController extends GetxController {
     Map<String?, int> _tempIndexes = await getFluttermojiOptions();
     selectedIndexes = _tempIndexes;
     update();
-    fluttermoji.value = getFluttermojiFromOptions();
+    fluttermoji.value = getFluttermojiFromOptions(null);
     update();
   }
 
@@ -42,7 +43,7 @@ class FluttermojiController extends GetxController {
     String fluttermojiNew = '',
   }) {
     if (fluttermojiNew.isEmpty) {
-      fluttermojiNew = getFluttermojiFromOptions();
+      fluttermojiNew = getFluttermojiFromOptions(null);
     }
     fluttermoji.value = fluttermojiNew;
     update();
@@ -77,7 +78,7 @@ class FluttermojiController extends GetxController {
   ///  Thereby updating all the states which are listening to controller
   void setFluttermoji({String fluttermojiNew = ''}) async {
     if (fluttermojiNew.isEmpty) {
-      fluttermojiNew = getFluttermojiFromOptions();
+      fluttermojiNew = getFluttermojiFromOptions(null);
     }
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setString('fluttermoji', fluttermojiNew);
@@ -88,7 +89,7 @@ class FluttermojiController extends GetxController {
   }
 
   /// Generates a [String] fluttermoji from [selectedIndexes] pref
-  String getFluttermojiFromOptions() {
+  String getFluttermojiFromOptions(Color? backgroundColor) {
     String _fluttermojiStyle =
         fluttermojiStyle[_getFluttermojiProperty('style')]!;
     String _clothe = Clothes.generateClothes(
@@ -116,7 +117,11 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M12,160 C12,226.27417 65.72583,280 132,280 C198.27417,280 252,226.27417 252,160 L264,160 L264,-1.42108547e-14 L-3.19744231e-14,-1.42108547e-14 L-3.19744231e-14,160 L12,160 Z" id="path-3"></path>
 <path d="M124,144.610951 L124,163 L128,163 L128,163 C167.764502,163 200,195.235498 200,235 L200,244 L0,244 L0,235 C-4.86974701e-15,195.235498 32.235498,163 72,163 L72,163 L76,163 L76,144.610951 C58.7626345,136.422372 46.3722246,119.687011 44.3051388,99.8812385 C38.4803105,99.0577866 34,94.0521096 34,88 L34,74 C34,68.0540074 38.3245733,63.1180731 44,62.1659169 L44,56 L44,56 C44,25.072054 69.072054,5.68137151e-15 100,0 L100,0 L100,0 C130.927946,-5.68137151e-15 156,25.072054 156,56 L156,62.1659169 C161.675427,63.1180731 166,68.0540074 166,74 L166,88 C166,94.0521096 161.51969,99.0577866 155.694861,99.8812385 C153.627775,119.687011 141.237365,136.422372 124,144.610951 Z" id="path-5"></path>
 </defs>
-<g id="Fluttermoji" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<g id="Fluttermoji" stroke="none" stroke-width="1" fill=''' +
+        (backgroundColor! != null
+            ? ('#' + backgroundColor.value.toRadixString(16))
+            : 'none') +
+        ''' fill-rule="evenodd">
 <g transform="translate(-825.000000, -1100.000000)" id="Fluttermoji/Circle">
 <g transform="translate(825.000000, 1100.000000)">''' +
         _fluttermojiStyle +
