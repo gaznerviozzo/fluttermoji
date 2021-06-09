@@ -74,7 +74,7 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
 
     Get.put(FluttermojiController());
     _fluttermojiController = Get.find<FluttermojiController>();
-    _fluttermojiFunctions = Get.find<FluttermojiFunctions>();
+    _fluttermojiFunctions = new FluttermojiFunctions();
     setState(() {
       tabController = TabController(length: 11, vsync: this);
       fluttermojiController = _fluttermojiController;
