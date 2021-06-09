@@ -320,9 +320,8 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
                     setState(() {});
 
                     if (widget.onSave != null) {
-                      widget.onSave!(fluttermojiFunctions
-                          .decodeFluttermojifromString(jsonEncode(
-                              fluttermojiFunctions.encodeMySVGtoMap())));
+                      widget.onSave!(
+                          fluttermojiController.getFluttermojiFromOptions());
                     }
                   },
                   icon: Icon(
