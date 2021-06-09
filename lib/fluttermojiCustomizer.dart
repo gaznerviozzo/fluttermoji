@@ -320,7 +320,7 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
                   onPressed: () async {
                     fluttermojiController.setFluttermoji();
                     setState(() {});
-
+                    print("hola");
                     if (widget.onSave != null) {
                       widget.onSave!(fluttermojiController
                           .getFluttermojiFromOptions(widget.backgroundColor));

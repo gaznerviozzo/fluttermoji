@@ -151,6 +151,8 @@ class NewPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 30),
             child: FluttermojiCustomizer(
+              onSave: (String result) => print(result),
+              backgroundColor: Colors.red,
               //scaffoldHeight: 400,
               scaffoldWidth: isWeb ? 600 : null,
             ),

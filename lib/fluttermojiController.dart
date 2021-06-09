@@ -91,7 +91,7 @@ class FluttermojiController extends GetxController {
   /// Generates a [String] fluttermoji from [selectedIndexes] pref
   String getFluttermojiFromOptions(Color? backgroundColor) {
     String _backgroundColor = (backgroundColor != null
-        ? ('''"#${backgroundColor.value.toRadixString(16)}"''')
+        ? ('''#${backgroundColor.value.toRadixString(16)}''')
         : 'none');
 
     print(_backgroundColor);
