@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -318,8 +320,9 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
                     setState(() {});
 
                     if (widget.onSave != null) {
-                      widget.onSave!(
-                          await fluttermojiFunctions.encodeMySVGtoString());
+                      widget.onSave!(fluttermojiFunctions
+                          .decodeFluttermojifromString(jsonEncode(
+                              fluttermojiFunctions.encodeMySVGtoMap())));
                     }
                   },
                   icon: Icon(
